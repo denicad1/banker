@@ -17,7 +17,7 @@ public class accountController {
 
     @GetMapping()
     public List getAccounts(){
-       return accountService.getAccounts();
+       return (List) accountService.getAccounts();
     }
     @PostMapping(value="/add")
     public void addAccount(@RequestBody account body){

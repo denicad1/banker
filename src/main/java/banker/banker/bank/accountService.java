@@ -1,8 +1,9 @@
 package banker.banker.bank;
 
+import antlr.collections.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
+
 
 @Service
 public class accountService {
@@ -14,8 +15,8 @@ public class accountService {
         this.repo = repo;
     }
 
-    public List<account> getAccounts() {
-       return repo.findAll();
+    public List getAccounts() {
+       return (List) repo.findAll();
     }
 
     public void addAccount(account body) {
