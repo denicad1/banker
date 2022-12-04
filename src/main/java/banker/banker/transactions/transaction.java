@@ -1,5 +1,7 @@
 package banker.banker.transactions;
 
+import banker.banker.bank.account;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -15,6 +17,18 @@ public class transaction {
     private LocalDate transDate;
     private int amount;
     private boolean withdraw;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private account account;
+
+    public banker.banker.bank.account getAccount() {
+        return account;
+    }
+
+    public void setAccount(banker.banker.bank.account account) {
+        this.account = account;
+    }
 
     public transaction(int amount, boolean withdraw) {
         this.amount = amount;

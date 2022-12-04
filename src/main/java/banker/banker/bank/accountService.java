@@ -1,12 +1,13 @@
 package banker.banker.bank;
 
-import antlr.collections.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import banker.banker.transactions.transactionsRepo;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -21,13 +22,8 @@ public class accountService {
         this.transRepo = transRepo;
     }
 
-    public ArrayList getAccounts() {
-        ArrayList accounts= (ArrayList) repo.findAll();
-        ArrayList transactions= (ArrayList) transRepo.findAll();
-        ArrayList actsTrans = new ArrayList();
-        actsTrans.add(accounts);
-        actsTrans.add(transactions);
-       return actsTrans;
+    public List getAccounts() {
+       return repo.findAll();
     }
 
     public void addAccount(account body) {
@@ -40,5 +36,9 @@ public class accountService {
     public void updateAccount(int id, String name, float amount) {
         account selectedAccount= repo.findById(id).orElseThrow(()-> new IllegalStateException("account doesn't exist"));
 
+    }
+    public Optional<List> getTransactions(int id){
+        Optional<List> transList=transRepo.findTransByAcct(id);
+        return transList;
     }
 }

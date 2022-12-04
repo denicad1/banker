@@ -1,9 +1,12 @@
 package banker.banker.bank;
 
+import banker.banker.transactions.transaction;
+
 import javax.persistence.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -12,13 +15,15 @@ import static javax.persistence.GenerationType.SEQUENCE;
 public class account {
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "id")
-    @SequenceGenerator(name = "id",sequenceName = "id",initialValue = 1,allocationSize = 1)
+    @SequenceGenerator(name = "id",sequenceName = "id",allocationSize = 1)
     private int id;
     private String name;
     private LocalDate creationDate;
     private float amount;
     @Transient
     private int age;
+    @OneToMany(mappedBy = "account")
+    private List<transaction> transactions;
 
     public account(String name, LocalDate creationDate,float amount) {
         this.name = name;

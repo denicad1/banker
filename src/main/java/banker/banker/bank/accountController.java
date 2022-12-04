@@ -3,6 +3,7 @@ package banker.banker.bank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/accounts")
@@ -32,5 +33,9 @@ public class accountController {
                               @RequestParam(required = false)String name,
                               @RequestParam(required = false)float amount){
         accountService.updateAccount(id,name,amount);
+    }
+    @GetMapping(value = "/transactions")
+    public Optional<List> getTransactions(int id){
+        return accountService.getTransactions(id);
     }
 }

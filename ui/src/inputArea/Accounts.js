@@ -8,17 +8,19 @@ class Accounts extends Component {
         
     }
     async componentDidMount(){
-        
         const response= await fetch("/accounts");
-        
         if (!response.ok) {
           throw new Error(`Error! status: ${response.status}`);
         }
-        
         const body= await response.json();
-
-        this.setState({accounts:body[0]})
+        this.setState({accounts:body})
        
+    }
+
+    getAccount=(e)=>{
+        const name=e.target.innerHTML;
+        const account= this.state.accounts.find(account=>{return account.name===name});
+        //need to lift state up so can use context to send it to transactions columns
     }
    
     
@@ -28,8 +30,8 @@ class Accounts extends Component {
             <div className='border mx-5 p-3 position-absolute top-20' >
                 <h1>Accounts</h1>
                
-                {this.state.accounts?.map((account)=>{
-                  return  <div key={account.id}>{`${account.name}`}<br/></div>
+                {this.state.accounts.map((account)=>{
+                  return  <div key={account.id} onClick={this.getAccount}>{`${account.name}`}</div>
                 })}
 
 
