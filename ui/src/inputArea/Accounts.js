@@ -14,12 +14,13 @@ class Accounts extends Component {
         }
         const body= await response.json();
         this.setState({accounts:body})
-       
     }
+
 
     getAccount=(e)=>{
         const name=e.target.innerHTML;
         const account= this.state.accounts.find(account=>{return account.name===name});
+        this.props.onAccountSelect(account);
         //need to lift state up so can use context to send it to transactions columns
     }
    

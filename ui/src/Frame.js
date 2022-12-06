@@ -10,14 +10,19 @@ import Card from './general/Card';
 class Frame extends Component {
     constructor(props) {
         super(props);
-        this.state={};
+        this.state={account:{}};
+    }
+
+    getAccount=(account)=>{
+        this.setState({account});
     }
     
 
     render() {
         return (
             <>
-                <Accounts/>
+                <Accounts
+                onAccountSelect={this.getAccount}/>
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
@@ -28,7 +33,7 @@ class Frame extends Component {
                 <InputArea/>
                 </Card>
                 <Card>
-                <AmountColumns/>
+                <AmountColumns account={this.state.account}/>
                 </Card>
             </>
         );
