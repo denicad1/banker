@@ -29,7 +29,7 @@ class Frame extends Component {
                     <NavbarText><NewAccount /></NavbarText>
                 </Navbar>
                 <Card>
-                <Balance/>
+                <Balance account={this.state.account}/>
                 <InputArea/>
                 </Card>
                 <Card>

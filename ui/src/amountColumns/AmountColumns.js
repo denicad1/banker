@@ -6,9 +6,10 @@ class AmountColumns extends Component {
     constructor(props){
         super(props);
         state={depositList:[],
-        withdrawList:[]}
+        withdrawList:[],
+        account:this.props.account}
     }
-    //need to pass account down as prop to filter list of transactions
+    //need to get transactions using account and filter to make withdraws and deposit list
     
     render() {
         return (
