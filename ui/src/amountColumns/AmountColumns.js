@@ -5,7 +5,7 @@ import Transactions from './Transactions';
 class AmountColumns extends Component {
     constructor(props){
         super(props);
-        state={depositList:[],
+        this.state={depositList:[],
         withdrawList:[],
         account:this.props.account}
     }
