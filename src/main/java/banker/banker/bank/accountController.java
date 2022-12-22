@@ -34,8 +34,8 @@ public class accountController {
                               @RequestParam(required = false)float amount){
         accountService.updateAccount(id,name,amount);
     }
-    @GetMapping(value = "/transactions")
-    public Optional<List> getTransactions(int id){
+    @GetMapping(value = "/transactions/{id}")
+    public Optional<List> getTransactions(@PathVariable("id") int id){
         return accountService.getTransactions(id);
     }
 }

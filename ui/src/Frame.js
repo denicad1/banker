@@ -15,6 +15,7 @@ class Frame extends Component {
 
     getAccount=(account)=>{
         this.setState({account});
+       
     }
     
 

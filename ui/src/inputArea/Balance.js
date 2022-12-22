@@ -11,6 +11,7 @@ class Balance extends Component {
         let amount=this.props.account.amount
         return (
             <div>
+                
                 <h1>Balance</h1>
                 <h2>{amount}</h2>
                 
