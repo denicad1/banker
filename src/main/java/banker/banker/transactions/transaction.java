@@ -20,13 +20,13 @@ public class transaction {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private account account;
+    private int account;
 
-    public banker.banker.bank.account getAccount() {
+    public int getAccount() {
         return account;
     }
 
-    public void setAccount(banker.banker.bank.account account) {
+    public void setAccount(int id) {
         this.account = account;
     }
 
@@ -34,6 +34,13 @@ public class transaction {
         this.amount = amount;
         this.withdraw = withdraw;
     }
+
+    public transaction(int amount, boolean withdraw, int account) {
+        this.amount = amount;
+        this.withdraw = withdraw;
+        this.account = account;
+    }
+
     public transaction() {
     }
 
