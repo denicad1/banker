@@ -38,7 +38,7 @@ public class accountService {
 
     }
     public Optional<List> getTransactions(int id){
-        Optional<List> transList=transRepo.findTransByAcct(id);
+        Optional<List> transList= transRepo.findTransByAcct(id);
         return transList;
     }
 }

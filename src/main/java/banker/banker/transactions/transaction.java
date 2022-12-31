@@ -18,11 +18,11 @@ public class transaction {
     private int amount;
     private boolean withdraw;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne()
     @JoinColumn(name = "account_id", referencedColumnName = "id")
-    private int account;
+    private account account;
 
-    public int getAccount() {
+    public account getAccount() {
         return account;
     }
 
@@ -35,7 +35,7 @@ public class transaction {
         this.withdraw = withdraw;
     }
 
-    public transaction(int amount, boolean withdraw, int account) {
+    public transaction(int amount, boolean withdraw, account account) {
         this.amount = amount;
         this.withdraw = withdraw;
         this.account = account;

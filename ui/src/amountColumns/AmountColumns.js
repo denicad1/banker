@@ -7,23 +7,29 @@ const AmountColumns=(props)=> {
     const[depositList,setDepositList]=useState(0);
     const[withdrawList,setWithdrawList]=useState(0);
     const[account,setAccount]=useState(0);
-    //need to get transactions using account and filter to make withdraws and deposit list
+    
     
      useEffect(()=>{ 
         setAccount(props.account);
+        if (Object.keys(account).length!==0) {
+             console.log(props.account)
+             console.log(account);
+             let id=account.id;
         const response=async ()=>{
-            const response= await fetch(`/accounts/transactions/1`);
-            if (!response.ok) {
-                console.log(response);
-              throw new Error(`Error! status: ${response.status}`);
-            }
+            const response= await fetch(`/accounts/transactions/${id}`);
+            
             const body= await response.json();
-            setWithdrawList(body.filter(trans=>{return trans.withdraw===true}));
-            setDepositList(body.filter(trans=>{return trans.withdraw===false}));
+          let withdraw=body.filter(trans=> trans.withdraw===true);
+          //filter not working in useState functions. need to assign to var first
+            setWithdrawList(withdraw);
+            //setDepositList(body.filter(trans=>trans.withdraw===false));
+             console.log(withdrawList,depositList);
         }
-        //lists not generating correct transactions. need to figure out why
-        response().catch(console.error())
-    },[])
+        //lists not generating correct transactions. need to have account be the latest value and not one step behind
+        response().catch(console.error)
+        }
+        
+    },[props.account])
         
   
 
@@ -32,8 +38,17 @@ const AmountColumns=(props)=> {
     
         return (
             <div className='d-flex justify-content-around'>
-                <Transactions/>
-                <Transactions/>
+                  
+                   
+
+                <Transactions>
+                    {/* {depositList.forEach(dep => {
+                        <div>dep</div>
+                    })} */}
+                </Transactions>
+                <Transactions>
+                    
+                </Transactions>
             </div>
         );
     
