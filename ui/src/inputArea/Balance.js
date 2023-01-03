@@ -13,7 +13,7 @@ class Balance extends Component {
             <div>
                 
                 <h1>Balance</h1>
-                <h2>{amount}</h2>
+                <h2>{amount?amount:0}</h2>
                 
             </div>
         );

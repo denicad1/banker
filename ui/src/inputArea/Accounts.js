@@ -14,7 +14,7 @@ class Accounts extends Component {
         }
         const body= await response.json();
         this.setState({accounts:body})
-        this.props.onAccountSelect(body[0]);
+       
     }
 
 
