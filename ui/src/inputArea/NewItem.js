@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { Button } from "reactstrap";
+
 import NewItemInput from './NewItemInput';
 
 class NewItem extends Component {
@@ -9,7 +9,7 @@ class NewItem extends Component {
         
         return (
             <div className={this.classes}>
-                <Button color='primary'>New Amount</Button>
+                
                 <NewItemInput/>
 
                     
