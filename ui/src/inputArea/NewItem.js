@@ -10,7 +10,7 @@ class NewItem extends Component {
         return (
             <div className={this.classes}>
                 
-                <NewItemInput/>
+                <NewItemInput account={this.props.account}/>
 
                     
 

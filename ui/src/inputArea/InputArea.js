@@ -17,7 +17,7 @@ class InputArea extends Component {
                 
                 <div className='d-flex justify-content-around align-items-center m-3'>
                     
-                    <NewItem />
+                    <NewItem account={this.props.account} />
                 </div>
 
             </div>
