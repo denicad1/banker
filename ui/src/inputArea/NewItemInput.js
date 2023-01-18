@@ -1,31 +1,30 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { InputGroup, InputGroupText, Input, Form, Button} from "reactstrap";
-import Transactions from '../amountColumns/Transactions';
+
 import NewItemDrop from './NewItemDrop';
 
 class NewItemInput extends Component {
     constructor(props) {
         super(props);
-        const [transaction,setTransaction]=useState({amount:0,withdraw:null,account:null});
+        
+        this.state={amount:0,withdraw:null,account:this.props.account};
         
 
     }
     newType=(type)=>{
-        type==='Withdraw'? setTransaction({withdraw:true}) : setTransaction({withdraw:false});
+        type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
     }
     handleTrans=()=>{
-        setTransaction
-
+     let selectedAccount=this.state.account;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: 'React POST Request Example' })
+            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:this.state.account})
         };
-        fetch('https://reqres.in/api/posts', requestOptions)
-            .then(response => response.json())
-            .then(data => this.setState({ postId: data.id }));
-
-    }
+        fetch(`/accounts/transactions/${selectedAccount.id}/add`, requestOptions)
+            .then(response => response.json());
+            // .then(data => this.setState({ postId: data.id }));
+    };
     // need to finish method for lifting up transType and then create method for posting to database and refresh app for 
     // new list of Transactions. also need to add field for Description.
     //need to finish setting up POST method with state. 
@@ -33,12 +32,13 @@ class NewItemInput extends Component {
     
 
     render() {
+       console.log(this.state);
         return (
             <React.Fragment>
-                <Button color='primary' onClick={handleTrans} >New Amount</Button>
+                <Button color='primary' onClick={this.handleTrans} >New Amount</Button>
                 <Form className='d-flex'>
                     <InputGroup className='mx-3'>
-                        <Input placeholder='please enter an amount' onInput={e=>{setTransaction({amount:e.target.value})}}/>
+                        <Input placeholder='please enter an amount' onInput={e=>{this.setState({amount:e.target.value})}}/>
                         <InputGroupText>$</InputGroupText>
                     </InputGroup>
                     <NewItemDrop transType={this.newType}/>

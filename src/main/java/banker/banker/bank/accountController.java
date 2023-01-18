@@ -1,5 +1,6 @@
 package banker.banker.bank;
 
+import banker.banker.transactions.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -37,5 +38,9 @@ public class accountController {
     @GetMapping(value = "/transactions/{id}")
     public Optional<List> getTransactions(@PathVariable("id") int id){
         return accountService.getTransactions(id);
+    }
+    @PostMapping(value="/transactions/{id}/add")
+    public void addTransaction(@RequestBody transaction body){
+        accountService.addTransaction(body);
     }
 }

@@ -1,5 +1,6 @@
 package banker.banker.bank;
 
+import banker.banker.transactions.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import banker.banker.transactions.transactionsRepo;
@@ -40,5 +41,8 @@ public class accountService {
     public Optional<List> getTransactions(int id){
         Optional<List> transList= transRepo.findTransByAcct(id);
         return transList;
+    }
+    public void addTransaction(transaction body) {
+        transRepo.save(body);
     }
 }
