@@ -14,25 +14,25 @@ class NewItemInput extends Component {
     newType=(type)=>{
         type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
     }
-    handleTrans=()=>{
-     let selectedAccount=this.state.account;
+    handleTrans=async ()=>{
+       console.log(this.props.account);
+     let selectedAccount=this.props.account;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:this.state.account})
+            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:this.props.account})
         };
-        fetch(`/accounts/transactions/${selectedAccount.id}/add`, requestOptions)
-            .then(response => response.json());
+        await fetch(`/accounts/transactions/${selectedAccount.id}/add`, requestOptions)
+           
             // .then(data => this.setState({ postId: data.id }));
     };
-    // need to finish method for lifting up transType and then create method for posting to database and refresh app for 
-    // new list of Transactions. also need to add field for Description.
-    //need to finish setting up POST method with state. 
-    //created update using function component not class so need to edit this for class update
+    // need to make method for having frame update components. account id in transaction table is null. need to figure out why
+    // see if I can have account be in the state or if I should keep using props instead
+    
     
 
     render() {
-       console.log(this.state);
+      
         return (
             <React.Fragment>
                 <Button color='primary' onClick={this.handleTrans} >New Amount</Button>

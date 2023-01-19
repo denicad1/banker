@@ -26,7 +26,7 @@ public class transaction {
         return account;
     }
 
-    public void setAccount(int id) {
+    public void setAccount(account id) {
         this.account = account;
     }
 
@@ -35,7 +35,7 @@ public class transaction {
         this.withdraw = withdraw;
     }
 
-    public transaction(int amount, boolean withdraw, account account) {
+    public transaction(Integer amount, boolean withdraw, account account) {
         this.amount = amount;
         this.withdraw = withdraw;
         this.account = account;

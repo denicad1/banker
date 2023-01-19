@@ -16,7 +16,7 @@ public class account {
     @Id
     @GeneratedValue(strategy = SEQUENCE, generator = "id")
     @SequenceGenerator(name = "id",sequenceName = "id",allocationSize = 1)
-    private int id;
+    private Integer id;
     private String name;
     private LocalDate creationDate;
     private float amount;
@@ -35,11 +35,11 @@ public class account {
     public account() {
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

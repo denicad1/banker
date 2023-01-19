@@ -39,7 +39,7 @@ public class accountController {
     public Optional<List> getTransactions(@PathVariable("id") int id){
         return accountService.getTransactions(id);
     }
-    @PostMapping(value="/transactions/{id}/add")
+    @PostMapping(value="/transactions/{id}/add", consumes = "application/json")
     public void addTransaction(@RequestBody transaction body){
         accountService.addTransaction(body);
     }
