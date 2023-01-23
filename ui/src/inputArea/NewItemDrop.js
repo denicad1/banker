@@ -15,14 +15,13 @@ class NewItemDrop extends Component {
     toggle = () => this.setState({dropdownOpen:!this.state.dropdownOpen});
     classes="d-flex ";
     display=(e)=>{
-        //console.log(e);
-        
-        if (this.state.name="Type") {
-           this.setState({name:e.target.textContent})
-        }
-        this.props.transType(this.state.name);
-
+        let type=e.target.textContent;
+        this.setState({name:type});
+        this.handleSubmit(type);
     };
+    handleSubmit=(txt)=>{
+        this.props.transType(txt);
+    }
 
     render() {
         return (

@@ -10,11 +10,11 @@ class NewItem extends Component {
         return (
             <div className={this.classes}>
                 
-                <NewItemInput account={this.props.account}/>
+                <NewItemInput account={this.props.account} update={this.props.update}/>
 
                     
 
-                    {/* need to make dropdown for deposit or withdraw */}
+                  
                 
             </div>
         );

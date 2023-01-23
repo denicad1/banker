@@ -26,7 +26,7 @@ public class transaction {
         return account;
     }
 
-    public void setAccount(account id) {
+    public void setAccount(account account) {
         this.account = account;
     }
 

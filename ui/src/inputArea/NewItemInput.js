@@ -13,21 +13,22 @@ class NewItemInput extends Component {
     }
     newType=(type)=>{
         type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
+        console.log(type, this.state.withdraw);
     }
     handleTrans=async ()=>{
        console.log(this.props.account);
+       
      let selectedAccount=this.props.account;
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:this.props.account})
+            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:selectedAccount})
         };
         await fetch(`/accounts/transactions/${selectedAccount.id}/add`, requestOptions)
-           
-            // .then(data => this.setState({ postId: data.id }));
+           this.props.update(this.props.account);
+        
     };
-    // need to make method for having frame update components. account id in transaction table is null. need to figure out why
-    // see if I can have account be in the state or if I should keep using props instead
+    // need to make method for having frame update components. 
     
     
 

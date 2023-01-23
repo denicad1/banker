@@ -31,7 +31,7 @@ class Frame extends Component {
                 </Navbar>
                 <Card>
                 <Balance account={this.state.account}/>
-                <InputArea account={this.state.account}/>
+                <InputArea account={this.state.account} update={this.getAccount}/>
                 </Card>
                 <Card>
                 <AmountColumns account={this.state.account}/>
