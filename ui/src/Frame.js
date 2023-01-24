@@ -10,16 +10,27 @@ import Card from './general/Card';
 class Frame extends Component {
     constructor(props) {
         super(props);
-        this.state={account:{}};
+        this.state={account:{},fetch:false};
     }
 
     getAccount=(account)=>{
-        this.setState({account});
+        this.setState({account,fetch:true});
        
+    }
+    handleFetch=(done)=>{
+        this.setState({fetch:done});
     }
     
 
     render() {
+        let account=this.state.account;
+        let id;
+        if (account.id) {
+            id=account.id;
+        }else{
+            id=1;
+        }
+        
         return (
             <>
                 <Accounts
@@ -34,7 +45,7 @@ class Frame extends Component {
                 <InputArea account={this.state.account} update={this.getAccount}/>
                 </Card>
                 <Card>
-                <AmountColumns account={this.state.account}/>
+                <AmountColumns account={id} fetch={this.state.fetch} done={this.handleFetch}/>
                 </Card>
             </>
         );

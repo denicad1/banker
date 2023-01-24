@@ -13,11 +13,8 @@ class NewItemInput extends Component {
     }
     newType=(type)=>{
         type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
-        console.log(type, this.state.withdraw);
     }
     handleTrans=async ()=>{
-       console.log(this.props.account);
-       
      let selectedAccount=this.props.account;
         const requestOptions = {
             method: 'POST',

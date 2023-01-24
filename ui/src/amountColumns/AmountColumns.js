@@ -4,21 +4,26 @@ import Transaction from './Transaction';
 
 
 const AmountColumns=(props)=> {
-  
     const[transList,setTransList]=useState([]);
-
+    let done=(e)=>{
+        props.done(e);
+    }
+    
      useEffect(()=>{ 
-        if (Object.keys(props.account).length!==0) {
-            let id=props.account.id;
+        if (props.fetch) {
+            
+        
+            let id=props.account;
             const response=async ()=>{
             const response= await fetch(`/accounts/transactions/${id}`);
             const body= await response.json();
             setTransList(body);  
         }
-        response().catch(console.error)
-        }
+        response().catch(console.error);
+        done(false);
+    }
         
-    },[props.account])
+    },[props.fetch])
     //need to pass down props to transaction component to style the list of transactions
         return (
             <div className='d-flex justify-content-around'>
