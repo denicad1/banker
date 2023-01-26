@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import banker.banker.transactions.transactionsRepo;
 
+import javax.transaction.Transactional;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,14 +34,13 @@ public class accountService {
     public void deleteAccount(int id) {
         repo.deleteById(id);
     }
-
+    @Transactional
     public void updateAccount(int id, String name, float amount) {
         account selectedAccount= repo.findById(id).orElseThrow(()-> new IllegalStateException("account doesn't exist"));
-
+        selectedAccount.setAmount(amount);
     }
     public Optional<List> getTransactions(int id){
-        Optional<List> transList= transRepo.findTransByAcct(id);
-        return transList;
+        return transRepo.findTransByAcct(id);
     }
     public void addTransaction(transaction body) {
         transRepo.save(body);

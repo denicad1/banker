@@ -15,17 +15,27 @@ class NewItemInput extends Component {
         type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
     }
     handleTrans=async ()=>{
-     let selectedAccount=this.props.account;
-        const requestOptions = {
+     const selectedAccount=this.props.account;
+     const amount=this.state.amount+selectedAccount.amount;
+     const newBal= this.state.withdraw==='Withdraw'?-amount:amount;
+        const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:selectedAccount})
         };
-        await fetch(`/accounts/transactions/${selectedAccount.id}/add`, requestOptions)
+        const putOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' }
+        };
+        await fetch(`/accounts/transactions/${selectedAccount.id}/add`, postOptions);
+       
+        await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(this.props.account);
         
     };
-    // need to make method for having frame update components. 
+    // PUT request is updating account balance but it appears to be a string instead of a float or int. need to have balance
+    // display on page and update automatically. also withdraws are not deducting from balance. need to fix newBal variable to 
+    //minus withdraw instead of making whole balance negative.
     
     
 
