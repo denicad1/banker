@@ -5,15 +5,18 @@ class Balance extends Component {
         super(props)
         
     }
-
+    amount={};
+    componentDidUpdate(){
+        this.amount=this.props.account
+    }
    
     render() {
-        let amount=this.props.account.amount
+        
         return (
             <div>
                 
                 <h1>Balance</h1>
-                <h2>{amount?amount:0}</h2>
+                <h2>{this.amount.amount}</h2>
                 
             </div>
         );

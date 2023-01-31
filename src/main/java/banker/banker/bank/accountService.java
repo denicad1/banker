@@ -2,6 +2,7 @@ package banker.banker.bank;
 
 import banker.banker.transactions.transaction;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import banker.banker.transactions.transactionsRepo;
 
@@ -25,7 +26,7 @@ public class accountService {
     }
 
     public List getAccounts() {
-       return repo.findAll();
+       return repo.findAll(Sort.by("id"));
     }
 
     public void addAccount(account body) {

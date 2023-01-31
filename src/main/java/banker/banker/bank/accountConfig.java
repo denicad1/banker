@@ -17,11 +17,11 @@ public class accountConfig {
     @Bean
     CommandLineRunner commandLineRunner(accountRepo repo,transactionsRepo transRepo){
         return  args -> {
-            account check=new account("checking", LocalDate.of(2022, OCTOBER,26),100);
+            account check=new account("checking", LocalDate.of(2022, OCTOBER,26),0);
             account saving=new account("savings",LocalDate.of(2022,OCTOBER,26),0);
             repo.saveAll(List.of(check,saving));
-            transaction dep=new transaction(200,false,saving);
-            transaction with=new transaction(100,true,check);
+            transaction dep=new transaction(0,false,saving);
+            transaction with=new transaction(0,true,check);
             transRepo.saveAll(List.of(dep,with));
         };
     }

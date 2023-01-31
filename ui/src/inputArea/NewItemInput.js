@@ -16,8 +16,9 @@ class NewItemInput extends Component {
     }
     handleTrans=async ()=>{
      const selectedAccount=this.props.account;
-     const amount=this.state.amount+selectedAccount.amount;
-     const newBal= this.state.withdraw==='Withdraw'?-amount:amount;
+     const amount=this.state.withdraw?-this.state.amount:this.state.amount;
+     const newBal=selectedAccount.amount+parseFloat(amount);
+     console.log(newBal);
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -31,6 +32,7 @@ class NewItemInput extends Component {
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(this.props.account);
+           
         
     };
     // PUT request is updating account balance but it appears to be a string instead of a float or int. need to have balance
