@@ -10,7 +10,9 @@ import Card from './general/Card';
 class Frame extends Component {
     constructor(props) {
         super(props);
-        this.state={account:{},fetch:false};
+        this.state={account:{},fetch:false
+    //    ,Bal:0
+    };
     }
 
     getAccount=(account)=>{
@@ -19,8 +21,11 @@ class Frame extends Component {
     }
     handleFetch=(done)=>{
         this.setState({fetch:done});
+        }
+    handleBal=(e)=>{
+        this.setState({Bal:e});
+        console.log(e);
     }
-    
 
     render() {
         let account=this.state.account;
@@ -41,8 +46,8 @@ class Frame extends Component {
                     <NavbarText><NewAccount /></NavbarText>
                 </Navbar>
                 <Card>
-                <Balance account={this.state.account}/>
-                <InputArea account={this.state.account} update={this.getAccount}/>
+                <Balance>{this.state.Bal}</Balance>
+                <InputArea account={this.state.account} update={this.getAccount} handleBal={this.handleBal}/>
                 </Card>
                 <Card>
                 <AmountColumns account={id} fetch={this.state.fetch} done={this.handleFetch}/>

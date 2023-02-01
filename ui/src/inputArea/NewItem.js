@@ -8,12 +8,15 @@ class NewItem extends Component {
     update=(account)=>{
     this.props.update(account);
     }
+    handleBal=(e)=>{
+        this.props.handleBal(e);
+    }
     render() {
         
         return (
             <div className={this.classes}>
                 
-                <NewItemInput account={this.props.account} update={this.update}/>
+                <NewItemInput account={this.props.account} update={this.update} bal={this.handleBal}/>
 
                     
 

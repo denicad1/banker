@@ -18,7 +18,6 @@ class NewItemInput extends Component {
      const selectedAccount=this.props.account;
      const amount=this.state.withdraw?-this.state.amount:this.state.amount;
      const newBal=selectedAccount.amount+parseFloat(amount);
-     console.log(newBal);
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -32,9 +31,11 @@ class NewItemInput extends Component {
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(this.props.account);
+           this.props.bal(newBal);
            
         
     };
+
     // PUT request is updating account balance but it appears to be a string instead of a float or int. need to have balance
     // display on page and update automatically. also withdraws are not deducting from balance. need to fix newBal variable to 
     //minus withdraw instead of making whole balance negative.
