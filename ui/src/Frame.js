@@ -16,14 +16,12 @@ class Frame extends Component {
     }
 
     getAccount=(account)=>{
-        this.setState({account,fetch:true}); 
+        this.setState(prevState=>({account,fetch:true,remount:!prevState.remount})); 
     }
     handleFetch=(done)=>{
-        this.setState({fetch:done,remount:false});
+        this.setState({fetch:done});
         }
-    handleBal=(e)=>{
-        this.setState({Bal:e,remount:true});
-    }
+    
 
     render() {
         let account=this.state.account;
@@ -37,7 +35,7 @@ class Frame extends Component {
         return (
             <>
                 <Accounts
-                onAccountSelect={this.getAccount} key={this.state.remount}/>
+                onAccountSelect={this.getAccount} key={this.state.remount}remount={this.state.remount}/>
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
@@ -45,7 +43,7 @@ class Frame extends Component {
                 </Navbar>
                 <Card>
                 <Balance>{account.amount}</Balance>
-                <InputArea account={this.state.account} update={this.getAccount} handleBal={this.handleBal}/>
+                <InputArea account={this.state.account} update={this.getAccount} />
                 </Card>
                 <Card>
                 <AmountColumns account={id} fetch={this.state.fetch} done={this.handleFetch}/>

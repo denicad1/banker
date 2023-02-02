@@ -14,8 +14,8 @@ class Accounts extends Component {
         }
         const body= await response.json();
         this.setState({accounts:body})
-       
     }
+    
 
 
     getAccount=(e)=>{
