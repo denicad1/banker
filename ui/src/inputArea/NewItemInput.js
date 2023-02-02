@@ -32,6 +32,7 @@ class NewItemInput extends Component {
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(this.props.account);
            this.props.bal(newBal);
+           console.log(newBal);
            
         
     };

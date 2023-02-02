@@ -11,20 +11,18 @@ class Frame extends Component {
     constructor(props) {
         super(props);
         this.state={account:{},fetch:false
-    //    ,Bal:0
+       ,Bal:0,remount:false
     };
     }
 
     getAccount=(account)=>{
-        this.setState({account,fetch:true});
-       
+        this.setState({account,fetch:true}); 
     }
     handleFetch=(done)=>{
-        this.setState({fetch:done});
+        this.setState({fetch:done,remount:false});
         }
     handleBal=(e)=>{
-        this.setState({Bal:e});
-        console.log(e);
+        this.setState({Bal:e,remount:true});
     }
 
     render() {
@@ -39,14 +37,14 @@ class Frame extends Component {
         return (
             <>
                 <Accounts
-                onAccountSelect={this.getAccount}/>
+                onAccountSelect={this.getAccount} key={this.state.remount}/>
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
                     <NavbarText><NewAccount /></NavbarText>
                 </Navbar>
                 <Card>
-                <Balance>{this.state.Bal}</Balance>
+                <Balance>{account.amount}</Balance>
                 <InputArea account={this.state.account} update={this.getAccount} handleBal={this.handleBal}/>
                 </Card>
                 <Card>
