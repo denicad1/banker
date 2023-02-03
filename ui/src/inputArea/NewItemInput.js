@@ -17,11 +17,13 @@ class NewItemInput extends Component {
     handleTrans=async ()=>{
      const selectedAccount=this.props.account;
      const amount=this.state.withdraw?-this.state.amount:this.state.amount;
-     const newBal=selectedAccount.amount+parseFloat(amount);
+     console.log(amount,selectedAccount.amount);
+    //  const newBal=selectedAccount.amount+parseFloat(amount);
+    const newBal=parseFloat(amount);
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:selectedAccount})
+            body: JSON.stringify({amount:newBal,withdraw:this.state.withdraw,account:selectedAccount})
         };
         const putOptions = {
             method: 'PUT',
@@ -31,6 +33,7 @@ class NewItemInput extends Component {
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(this.props.account);
+           console.log(newBal);
            
            
         

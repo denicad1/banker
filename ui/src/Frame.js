@@ -17,11 +17,21 @@ class Frame extends Component {
 
     getAccount=(account)=>{
         this.setState(prevState=>({account,fetch:true,remount:!prevState.remount})); 
+        this.handleBal();
     }
     handleFetch=(done)=>{
         this.setState({fetch:done});
         }
-    
+    handleBal=async()=>{
+        const response= await fetch("/accounts");
+        if (!response.ok) {
+          throw new Error(`Error! status: ${response.status}`);
+        }
+        const body= await response.json();
+        const account=body.find(acc=>acc.id===this.state.account.id);
+        console.log(account.amount);
+        this.setState({Bal:account.amount});
+    }
 
     render() {
         let account=this.state.account;
@@ -35,14 +45,14 @@ class Frame extends Component {
         return (
             <>
                 <Accounts
-                onAccountSelect={this.getAccount} key={this.state.remount}remount={this.state.remount}/>
+                onAccountSelect={this.getAccount} key={this.state.remount}/>
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
                     <NavbarText><NewAccount /></NavbarText>
                 </Navbar>
                 <Card>
-                <Balance>{account.amount}</Balance>
+                <Balance>{this.state.Bal}</Balance>
                 <InputArea account={this.state.account} update={this.getAccount} />
                 </Card>
                 <Card>
