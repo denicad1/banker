@@ -7,7 +7,7 @@ class NewItemInput extends Component {
     constructor(props) {
         super(props);
         
-        this.state={amount:0,withdraw:null,account:this.props.account};
+        this.state={amount:0,withdraw:null,account:{}};
         
 
     }
@@ -18,8 +18,7 @@ class NewItemInput extends Component {
      const selectedAccount=this.props.account;
      const amount=this.state.withdraw?-this.state.amount:this.state.amount;
      console.log(amount,selectedAccount.amount);
-    //  const newBal=selectedAccount.amount+parseFloat(amount);
-    const newBal=parseFloat(amount);
+     const newBal=selectedAccount.amount+parseFloat(amount);
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -32,7 +31,8 @@ class NewItemInput extends Component {
         await fetch(`/accounts/transactions/${selectedAccount.id}/add`, postOptions);
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
-           this.props.update(this.props.account);
+           this.props.update(selectedAccount);
+           this.setState({account:{},amount:0,withdraw:null})
            console.log(newBal);
            
            
