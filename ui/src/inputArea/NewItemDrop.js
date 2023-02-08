@@ -18,10 +18,12 @@ class NewItemDrop extends Component {
         let type=e.target.textContent;
         this.setState({name:type});
         this.handleSubmit(type);
+        
     };
     handleSubmit=(txt)=>{
         this.props.transType(txt);
     }
+    
 
     render() {
         return (

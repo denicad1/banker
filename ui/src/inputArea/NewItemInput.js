@@ -7,7 +7,7 @@ class NewItemInput extends Component {
     constructor(props) {
         super(props);
         
-        this.state={amount:0,withdraw:null,account:{}};
+        this.state={amount:"",withdraw:null,account:{}};
         
 
     }
@@ -22,7 +22,7 @@ class NewItemInput extends Component {
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:newBal,withdraw:this.state.withdraw,account:selectedAccount})
+            body: JSON.stringify({amount:this.state.amount,withdraw:this.state.withdraw,account:selectedAccount})
         };
         const putOptions = {
             method: 'PUT',
@@ -32,8 +32,8 @@ class NewItemInput extends Component {
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(selectedAccount);
-           this.setState({account:{},amount:0,withdraw:null})
-           console.log(newBal);
+           this.setState({account:{},amount:"",withdraw:null})
+           
            
            
         
@@ -52,10 +52,10 @@ class NewItemInput extends Component {
                 <Button color='primary' onClick={this.handleTrans} >New Amount</Button>
                 <Form className='d-flex'>
                     <InputGroup className='mx-3'>
-                        <Input placeholder='please enter an amount' onInput={e=>{this.setState({amount:e.target.value})}}/>
+                        <Input placeholder='please enter an amount' onInput={e=>{this.setState({amount:e.target.value})}} value={this.state.amount}/>
                         <InputGroupText>$</InputGroupText>
                     </InputGroup>
-                    <NewItemDrop transType={this.newType}/>
+                    <NewItemDrop transType={this.newType} />
                 </Form>
             </React.Fragment>
         );

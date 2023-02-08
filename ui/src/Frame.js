@@ -15,9 +15,9 @@ class Frame extends Component {
     };
     }
 
-    getAccount=(account)=>{
+    getAccount=async (account)=>{
         this.setState(prevState=>({account,fetch:true,remount:!prevState.remount})); 
-        this.handleBal();
+        await this.handleBal();
     }
     handleFetch=(done)=>{
         this.setState({fetch:done});
@@ -28,7 +28,10 @@ class Frame extends Component {
           throw new Error(`Error! status: ${response.status}`);
         }
         const body= await response.json();
-        const account=body.find(acc=>acc.id===this.state.account.id);
+        const account=body.find(acc=>{
+            console.log(acc);
+            return (acc.id===this.state.account.id)});
+        console.log(account);
         console.log(account.amount);
         this.setState({Bal:account.amount});
     }

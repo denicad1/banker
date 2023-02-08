@@ -35,7 +35,7 @@ const AmountColumns=(props)=> {
                         } else {
                             textColor+=` bg-success`
                         }
-                        return <Transaction key={dep.id}>{`${dep.id}`} {`${dep.transdate}`} <span className={textColor}>{dep.amount}</span></Transaction>
+                        return <Transaction key={dep.id}>{`${dep.id}`}<span className={textColor}>{dep.amount}</span></Transaction>
                         }).reverse()}
                         
                 </Transactions>    
