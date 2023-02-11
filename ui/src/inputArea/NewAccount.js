@@ -17,7 +17,7 @@ class NewAccount extends Component {
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:0,creation_date:new Date().toLocaleDateString,name:this.state.name})
+            body: JSON.stringify({amount:0,name:this.state.name})
         };
         await fetch(`/accounts/add`, postOptions);
         this.setState({name:""})
