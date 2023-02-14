@@ -30,14 +30,13 @@ class NewAccount extends Component {
         let dialog;
         if (this.state.toggle) {
            dialog= <div>
-                <input onInput={e=>{this.setState({name:e.target.value})}}placeholder="Enter account name"></input>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <input className='align-middle' onInput={e=>{this.setState({name:e.target.value})}}placeholder="Enter account name"></input>
+                <Button color='success' className='mx-1' onClick={this.handleSubmit}>Submit</Button>
             </div>
-        }
+        }else{dialog=<Button color="success"onClick={this.handleToggle}>New Account</Button>}
         return (
             <div>
                {dialog}
-               <Button color="success"onClick={this.handleToggle}>New Account</Button>
             </div>
         );
     }
