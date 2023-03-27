@@ -17,7 +17,7 @@ class NewAccount extends Component {
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({amount:0,creation_date:new Date().toLocaleDateString,name:this.state.name})
+            body: JSON.stringify({amount:0,name:this.state.name})
         };
         await fetch(`/accounts/add`, postOptions);
         this.setState({name:""})
@@ -30,14 +30,13 @@ class NewAccount extends Component {
         let dialog;
         if (this.state.toggle) {
            dialog= <div>
-                <input onInput={e=>{this.setState({name:e.target.value})}}placeholder="Enter account name"></input>
-                <button onClick={this.handleSubmit}>Submit</button>
+                <input className='align-middle' onInput={e=>{this.setState({name:e.target.value})}}placeholder="Enter account name"></input>
+                <Button color='success' className='mx-1' onClick={this.handleSubmit}>Submit</Button>
             </div>
-        }
+        }else{dialog=<Button color="success"onClick={this.handleToggle}>New Account</Button>}
         return (
             <div>
                {dialog}
-               <Button color="success"onClick={this.handleToggle}>New Account</Button>
             </div>
         );
     }

@@ -8,9 +8,14 @@ import banker.banker.transactions.transactionsRepo;
 
 import javax.transaction.Transactional;
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+
+import static java.time.Month.OCTOBER;
 
 
 @Service
@@ -30,6 +35,7 @@ public class accountService {
     }
 
     public void addAccount(account body) {
+        body.setCreationDate(LocalDate.now());
         repo.save(body);
     }
     public void deleteAccount(int id) {
