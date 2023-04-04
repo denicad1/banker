@@ -20,9 +20,6 @@ public class accountConfig {
             account check=new account("checking", LocalDate.of(2022, OCTOBER,26),0);
             account saving=new account("savings",LocalDate.of(2022,OCTOBER,26),0);
             repo.saveAll(List.of(check,saving));
-            transaction dep=new transaction(0,false,saving);
-            transaction with=new transaction(0,true,check);
-            transRepo.saveAll(List.of(dep,with));
         };
     }
 }
