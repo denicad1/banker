@@ -11,7 +11,7 @@ class Frame extends Component {
     constructor(props) {
         super(props);
         this.state={account:{},fetch:false
-       ,Bal:0,remount:false
+       ,Bal:0
     };
     }
 
@@ -48,7 +48,7 @@ class Frame extends Component {
         return (
             <>
                 <Accounts
-                onAccountSelect={this.getAccount} key={this.state.remount}/>
+                onAccountSelect={this.getAccount} />
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
