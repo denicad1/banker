@@ -8,6 +8,7 @@ class Accounts extends Component {
         
     }
     async componentDidMount(){
+        this.setState({accounts:[]});
         const response= await fetch("/accounts");
         if (!response.ok) {
           throw new Error(`Error! status: ${response.status}`);
