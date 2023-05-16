@@ -19,22 +19,22 @@ class Frame extends Component {
         this.setState(prevState=>({account,fetch:true,remount:!prevState.remount})); 
         await this.handleBal();
     }
-    handleFetch=(done)=>{
-        this.setState({fetch:done});
+    handleBal=(bal)=>{
+        this.setState({Bal:bal});
         }
-    handleBal=async()=>{
-        const response= await fetch("/accounts");
-        if (!response.ok) {
-          throw new Error(`Error! status: ${response.status}`);
-        }
-        const body= await response.json();
-        const account=body.find(acc=>{
-            console.log(acc);
-            return (acc.id===this.state.account.id)});
-        console.log(account);
-        console.log(account.amount);
-        this.setState({Bal:account.amount});
-    }
+    // handleBal=async()=>{
+    //     const response= await fetch("/accounts");
+    //     if (!response.ok) {
+    //       throw new Error(`Error! status: ${response.status}`);
+    //     }
+    //     const body= await response.json();
+    //     const account=body.find(acc=>{
+    //         console.log(acc);
+    //         return (acc.id===this.state.account.id)});
+    //     console.log(account);
+    //     console.log(account.amount);
+    //     this.setState({Bal:account.amount});
+    // }
 
     render() {
         let account=this.state.account;
@@ -59,7 +59,7 @@ class Frame extends Component {
                 <InputArea account={this.state.account} update={this.getAccount} />
                 </Card>
                 <Card>
-                <AmountColumns account={id} fetch={this.state.fetch} done={this.handleFetch}/>
+                <AmountColumns account={id} fetch={this.state.fetch} bal={this.handleBal}/>
                 </Card>
             </>
         );
