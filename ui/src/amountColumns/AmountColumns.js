@@ -5,6 +5,9 @@ import Transaction from './Transaction';
 
 const AmountColumns=(props)=> {
     const[transList,setTransList]=useState([]);
+    let done=(e)=>{
+        props.done(e);
+    }
     const deps=[];
     const withs=[];
     const filterTrans=()=>{transList.filter(tran=>{
@@ -15,27 +18,37 @@ const AmountColumns=(props)=> {
         } 
     });}
     const transReducer=()=>{
-        if (deps.length>0||withs.length>0) {
-            let depsTotal=deps.reduce((acc,cur)=>acc+cur);
-            let withsTotal=withs.reduce((acc,cur)=>acc+cur);
-            let total =depsTotal-withsTotal
-            props.bal(total);
+        let depsTotal=0;
+        let withsTotal=0;
+        if (deps.length>0) {
+            depsTotal=deps.reduce((acc,cur)=>acc+cur);
         }
+        if (withs.length>0) {
+            withsTotal=withs.reduce((acc,cur)=>acc+cur);
+        }
+        let total =depsTotal-withsTotal;
+            props.bal(total);
     }
+    
      useEffect(()=>{ 
         if (props.fetch) {
+            
+        
             let id=props.account;
             const response=async ()=>{
             const response= await fetch(`/accounts/transactions/${id}`);
             const body= await response.json();
-            setTransList(body);  
-            
+            setTransList(body); 
+               
         }
         response().catch(console.error);
+        done(false);
     }
-    },[props.fetch])
     filterTrans();
-    transReducer();
+    transReducer(); 
+    },[transList,props.fetch])
+    
+    //need to pass down props to transaction component to style the list of transactions
         return (
             <div className='d-flex justify-content-around'>
                 <Transactions>
@@ -53,4 +66,5 @@ const AmountColumns=(props)=> {
             </div>
         ); 
 }
+
 export default AmountColumns;

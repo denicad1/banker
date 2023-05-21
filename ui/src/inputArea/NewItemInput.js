@@ -17,7 +17,6 @@ class NewItemInput extends Component {
     handleTrans=async ()=>{
      const selectedAccount=this.props.account;
      const amount=this.state.withdraw?-this.state.amount:this.state.amount;
-     console.log(amount,selectedAccount.amount);
      const newBal=selectedAccount.amount+parseFloat(amount);
         const postOptions = {
             method: 'POST',
