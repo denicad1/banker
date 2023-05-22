@@ -12,6 +12,11 @@ class NewItemDrop extends Component {
         this.state={dropdownOpen:false,
         name:"Type"};
     }
+    componentDidMount(){
+            this.setState((state, props) => ({
+                name: props.transValue
+              }));
+    }
     toggle = () => this.setState({dropdownOpen:!this.state.dropdownOpen});
     classes="d-flex ";
     display=(e)=>{

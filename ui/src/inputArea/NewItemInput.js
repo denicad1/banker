@@ -6,17 +6,22 @@ import NewItemDrop from './NewItemDrop';
 class NewItemInput extends Component {
     constructor(props) {
         super(props);
-        
-        this.state={amount:"",withdraw:null,account:{}};
-        
-
+        this.state={amount:"",withdraw:null,account:{},type:"Type"};
     }
     newType=(type)=>{
+        this.setState((state,props)=>({type}));
         type==='Withdraw'? this.setState({withdraw:true}) : this.setState({withdraw:false});
     }
     handleTrans=async ()=>{
      const selectedAccount=this.props.account;
-     const amount=this.state.withdraw?-this.state.amount:this.state.amount;
+     let amount=this.state.amount;
+     if (isNaN(amount)) {
+        alert("Please enter a valid number");
+        this.setState({amount:""});
+        return;
+     } else {
+        amount=this.state.withdraw?-amount:amount;
+     }
      const newBal=selectedAccount.amount+parseFloat(amount);
         const postOptions = {
             method: 'POST',
@@ -31,7 +36,7 @@ class NewItemInput extends Component {
        
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(selectedAccount);
-           this.setState({account:{},amount:"",withdraw:null})
+           this.setState((state,props)=>({account:{},amount:"",withdraw:null,type:"Type"}));
            
            
            
@@ -41,11 +46,7 @@ class NewItemInput extends Component {
     // PUT request is updating account balance but it appears to be a string instead of a float or int. need to have balance
     // display on page and update automatically. also withdraws are not deducting from balance. need to fix newBal variable to 
     //minus withdraw instead of making whole balance negative.
-    
-    
-
-    render() {
-      
+    render() {   
         return (
             <React.Fragment>
                 <Button color='primary' onClick={this.handleTrans} >New Amount</Button>
@@ -54,7 +55,7 @@ class NewItemInput extends Component {
                         <Input placeholder='please enter an amount' onInput={e=>{this.setState({amount:e.target.value})}} value={this.state.amount}/>
                         <InputGroupText>$</InputGroupText>
                     </InputGroup>
-                    <NewItemDrop transType={this.newType} />
+                    <NewItemDrop key={this.state.type} transType={this.newType} transValue={this.state.type}/>
                 </Form>
             </React.Fragment>
         );
