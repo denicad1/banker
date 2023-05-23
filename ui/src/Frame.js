@@ -12,12 +12,11 @@ class Frame extends Component {
         super(props);
         this.state = {
             account: {}, fetch: false
-            , Bal: 0, remount: false
         };
     }
 
     getAccount = async (account) => {
-        this.setState(prevState => ({ account, fetch: true, remount: !prevState.remount }));
+        this.setState(prevState => ({ account, fetch: true}));
         await this.handleBal();
     }
     handleFetch = (done) => {
@@ -46,23 +45,28 @@ class Frame extends Component {
     render() {
         let account = this.state.account;
         let id;
+        let amount;
         if (account.id) {
             id = account.id;
         } else {
-            id = 1;
+            id = 0;
         }
-
+        if (!account.id) {
+            amount="Please Select an account";
+        }else{
+            amount=account.amount?account.amount:"0";
+        }
         return (
             <>
                 <Accounts
-                    onAccountSelect={this.getAccount} key={this.state.remount} />
+                    onAccountSelect={this.getAccount}  />
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
                     <NavbarText><NewAccount /></NavbarText>
                 </Navbar>
                 <Card>
-                    <Balance>{this.state.account.amount}</Balance>
+                    <Balance>{amount}</Balance>
                     <InputArea account={this.state.account} update={this.getAccount} />
                 </Card>
                 <Card>

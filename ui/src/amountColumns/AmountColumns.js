@@ -27,7 +27,7 @@ const AmountColumns=(props)=> {
             withsTotal=withs.reduce((acc,cur)=>acc+cur);
         }
         let total =depsTotal-withsTotal;
-            props.bal(total);
+            props.bal(total?total:null);
     }
     
      useEffect(()=>{ 
