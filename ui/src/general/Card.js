@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 
 class Card extends Component {
-    classes=`bg-secondary w-50 mx-auto my-5 rounded p-3 border border-3 border-dark`;
+    classes=`bg-light w-50 mx-auto my-5 rounded p-3 `;
     render() {
+        let addClasses= this.props.className? this.props.className:'';
         return (
-            <div className={this.classes}>
+            <div className={this.classes + addClasses}>
                 {this.props.children}
             </div>
         );

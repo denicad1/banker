@@ -7,7 +7,8 @@ class NewAccount extends Component {
         super(props);
 
         this.state={
-            toggle:false
+            toggle:false,
+            fetchAccounts:false
         }
     }
     handleToggle=()=>{
@@ -20,7 +21,8 @@ class NewAccount extends Component {
             body: JSON.stringify({amount:0,name:this.state.name})
         };
         await fetch(`/accounts/add`, postOptions);
-        this.setState({name:""})
+        this.setState(prevState=>({name:"",fetchAccounts:!prevState.fetchAccounts}));
+        this.props.fetchAccounts(this.state.fetchAccounts);
         this.handleToggle();
     }
     //getting error on the date is happening. i think because it isn't the same format. will need to get that fixed. also style the 

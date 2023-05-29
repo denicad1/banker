@@ -11,9 +11,15 @@ class Frame extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            account: {}, fetch: false
+            account: {}, fetch: false,fetchAccounts:false
         };
     }
+
+    fetchAccounts=(accounts)=>{
+        
+        this.setState(prevState=>({fetchAccounts:!prevState.fetchAccounts}));
+        console.log(this.state.fetchAccounts)
+    };
 
     getAccount = async (account) => {
         this.setState(prevState => ({ account, fetch: true}));
@@ -59,13 +65,13 @@ class Frame extends Component {
         return (
             <>
                 <Accounts
-                    onAccountSelect={this.getAccount}  />
+                    onAccountSelect={this.getAccount} key={this.state.fetchAccounts} />
                 <Navbar color='dark'>
                     <Nav className="me-auto" navbar>
                     </Nav>
-                    <NavbarText><NewAccount /></NavbarText>
+                    <NavbarText><NewAccount fetchAccounts={this.fetchAccounts} /></NavbarText>
                 </Navbar>
-                <Card>
+                <Card className={`border border-3 border-dark`}>
                     <Balance>{amount}</Balance>
                     <InputArea account={this.state.account} update={this.getAccount} />
                 </Card>

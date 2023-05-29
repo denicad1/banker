@@ -4,7 +4,7 @@ import './custom.css'
 class Accounts extends Component {
     constructor(props) {
         super(props);
-        this.state={accounts:[]};
+        this.state={accounts:[],fetchAccounts:false};
         
     }
     async componentDidMount(){
@@ -16,6 +16,7 @@ class Accounts extends Component {
         const body= await response.json();
         this.setState({accounts:body});
     }
+    
     
 
 
