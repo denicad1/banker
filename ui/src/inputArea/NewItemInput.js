@@ -17,12 +17,13 @@ class NewItemInput extends Component {
      let amount=this.state.amount;
      if (isNaN(amount)) {
         alert("Please enter a valid number");
-        this.setState({amount:""});
+        this.setState(()=>({amount:"",type:"Type"}));
         return;
      } else {
         amount=this.state.withdraw?-amount:amount;
      }
      const newBal=selectedAccount.amount+parseFloat(amount);
+     if (newBal>=0) {
         const postOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -37,6 +38,12 @@ class NewItemInput extends Component {
         await fetch(`/accounts/${selectedAccount.id}?amount=${newBal}`, putOptions)
            this.props.update(selectedAccount);
            this.setState((state,props)=>({account:{},amount:"",withdraw:null,type:"Type"}));
+     } else {
+        alert("Withdraw will overdraw your account. Please enter select a new withdraw amount");
+        this.setState(()=>({amount:"",type:"Type"}));
+        return;
+     }
+        
            
            
            

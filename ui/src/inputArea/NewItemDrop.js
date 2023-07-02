@@ -9,26 +9,35 @@ import {
 class NewItemDrop extends Component {
     constructor(props) {
         super(props);
-        this.state={dropdownOpen:false,
-        name:"Type"};
+        this.state = {
+            dropdownOpen: false,
+            name: "Type"
+        };
     }
-    componentDidMount(){
-            this.setState((state, props) => ({
-                name: props.transValue
-              }));
+    componentDidMount() {
+        this.setState((state, props) => ({
+            name: props.transValue
+        }));
     }
-    toggle = () => this.setState({dropdownOpen:!this.state.dropdownOpen});
-    classes="d-flex ";
-    display=(e)=>{
-        let type=e.target.textContent;
-        this.setState({name:type});
+    toggle = () => this.setState({ dropdownOpen: !this.state.dropdownOpen });
+    classes = "d-flex ";
+    display = (e) => {
+        let type = e.target.textContent;
+        this.setState(() => ({ name: type }));
         this.handleSubmit(type);
-        
+
     };
-    handleSubmit=(txt)=>{
-        this.props.transType(txt);
+    handleSubmit = (txt) => {
+        if (this.name === "Type") {
+            alert("Please select a transaction type");
+            return;
+        } else {
+            this.props.transType(txt);
+            this.setState(() => ({ name: "Type" }));
+        }
+
     }
-    
+
 
     render() {
         return (
