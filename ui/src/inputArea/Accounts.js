@@ -14,7 +14,7 @@ class Accounts extends Component {
           throw new Error(`Error! status: ${response.status}`);
         }
         const body= await response.json();
-        this.setState({accounts:body});
+        this.setState({accounts:new Set(body)});
     }
     
     
